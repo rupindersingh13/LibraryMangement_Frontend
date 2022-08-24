@@ -41,7 +41,7 @@ export class LogInComponent implements OnInit {
     Password:new FormControl,
 
   })
-  
+  // get x
   get x()
   {
     return this.loginform.controls
