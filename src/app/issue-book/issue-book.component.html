@@ -1,0 +1,213 @@
+<mat-card class="heading">
+  <h1>Issue Book</h1>
+</mat-card>
+<div class="row">
+  <div>
+    <mat-stepper style="margin-top: 3px;" linear #stepper>
+      <mat-step completed="{{completed}}">
+        <form [formGroup]="issueBook" class="example-form" style="margin-top: 35px;">
+          <ng-template matStepLabel>Fill out Form </ng-template>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput aria-label="StudentProp" [matAutocomplete]="auto" [formControl]="nameCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let StudentProp of filteredNames | async" [value]="StudentProp.name"
+                (click)="getval(StudentProp)">
+                <img style="border-radius: 25px;" class="example-option-img" aria-hidden [src]="StudentProp.image"
+                  height="30" width="25">
+                <span style="margin: 10px;">{{StudentProp.name}}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field><br>
+          <mat-form-field appearance="fill">
+            <mat-label>Student ID</mat-label>
+            <input matInput formControlName="Student_Id">
+          </mat-form-field><br>
+          <mat-form-field appearance="fill">
+            <mat-label>Class</mat-label>
+            <input matInput placeholder="ex.bca" formControlName="Class">
+          </mat-form-field><br>
+          <mat-form-field appearance="fill">
+            <mat-label>Books</mat-label>
+            <mat-select name="book" (selectionChange)="selectvalue($event)">
+              <mat-option [value]=[item.book_Id,item.book_Name] *ngFor='let item of bookList'>{{item.book_Name}}
+              </mat-option>
+
+            </mat-select>
+          </mat-form-field><br>
+
+
+          <mat-form-field appearance="fill" style="width: 202px;">
+            <mat-label> Date</mat-label>
+            <input matInput [matDatepicker]="pickers" formControlName="Issue_Date">
+            <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+            <mat-datepicker #pickers></mat-datepicker>
+          </mat-form-field><br>
+        </form>
+        <div>
+          <button mat-button (click)="onsubmit(stepper)">Submit</button>
+
+        </div>
+
+      </mat-step>
+      <mat-step>
+        <div id="print">
+          <ng-template matStepLabel>Recipt</ng-template>
+          <div>
+            <div class="border" style="width: 53pc;
+          margin-left: 94px;">
+              <div class="content">
+                <div class="center">
+                  <h2 style=" margin-top: 10px;">KPN library Recipt</h2>
+
+                </div>
+
+              </div>
+              <div class="col-md-14">
+                <div>
+                  <div style="height: 292px;" class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h5 class="mb-0">Full Name</h5>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <strong>{{studentformdata?.name}}</strong>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h5 class="mb-0">Class</h5>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <strong> {{studentformdata?.class}}</strong>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h5 class="mb-0">Book</h5>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <strong> {{ bookformdata?.value[1]}}</strong>
+                      </div>
+                    </div>
+
+
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h5 class="mb-0">Issue Date</h5>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <strong> {{date|date}}</strong>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h5 class="mb-0">Due Date</h5>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <strong> {{duedate|date}}</strong>
+                      </div>
+                    </div>
+                    <hr>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="para">
+                <h4 style="margin-top: 18px;">Please Read The Instruction Carefully</h4>
+                <p class="font-weight-light">* Please submit book before your due date otherwise fine will be apply
+                  <strong class="danger">20₹/day</strong><br>
+                  * Return book after 15 days
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <mat-icon style=" margin-left: 34px;">print </mat-icon>
+
+        </div>
+        <div>
+          <button style="margin-left: 16px;" mat-button [useExistingCss]="true" printSectionId="print"
+            ngxPrint>print</button>
+
+          <button mat-button matStepperNext>Next</button>
+        </div>
+
+
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Finish</ng-template>
+        <div class="thankyou-page">
+          <div class="_header">
+
+            <h1>Thank You!</h1>
+          </div>
+          <div class="_body">
+            <div class="_box">
+              <h2>
+                <strong>Please check your Recipt</strong> and read instructions on how to submit library book.
+              </h2>
+              <p>
+                Thanks a bunch for filling that out. It means a lot to us, just like you do! We really appreciate you
+                giving us a moment of your time today. Thanks for being you.
+              </p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="onNoclick()">Finish</button>
+              </div>
+            </div>
+          </div>
+          <div>
+
+
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+
+    <!--  <mat-form-field   appearance="fill">
+        <mat-label>Student ID</mat-label>
+        <input matInput formControlName="Student_Id">
+      </mat-form-field><br>
+
+      <mat-form-field  appearance="fill">
+        <mat-label>Name</mat-label>
+        <mat-select name="book" (selectionChange)="selectSvalue($event)">
+          <mat-option [value]=[item.student_Id,item.name,item.class,item.image] *ngFor='let item of studentdata'>
+            {{item.name}}</mat-option>
+          <img class="example-option-img" aria-hidden src="item.image[3]" height="25">
+        </mat-select>
+      </mat-form-field><br>
+
+      <mat-form-field   appearance="fill">
+        <mat-label>Class</mat-label>
+        <input matInput placeholder="ex.bca" formControlName="Class">
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Books</mat-label>
+        <mat-select name="book" (selectionChange)="selectvalue($event)">
+          <mat-option [value]=[item.book_Id,item.book_Name,item.author,item.quantity,item.image]
+            *ngFor='let item of bookList'>{{item.book_Name}}</mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+      
+      <mat-form-field appearance="fill" style="width: 202px;">
+        <mat-label> Date</mat-label>
+        <input matInput [matDatepicker]="pickers" formControlName="Issue_Date">
+        <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+        <mat-datepicker #pickers></mat-datepicker>
+      </mat-form-field><br>
+      <button mat-raised-button color="primary" (click)="onsubmit()"> Submit</button>
+
+    </form> -->
+  </div>
+
+
+</div>

@@ -1,0 +1,11 @@
+.heading
+{
+    text-align: center;
+    background-color: #23272b;
+    color: wheat;
+}
+.setprinter{
+    position: relative;
+    top: -9px;
+    left: 16px;
+}

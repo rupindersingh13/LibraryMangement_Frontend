@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card ">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img  *ngIf="studentData?.image!=null" src="{{studentData?.image}}" alt="Admin"
+                                class="rounded-circle" style="    height: 140px;
+                                width: 155px;">
+                            <img *ngIf="studentData?.image==null" src="../../../assets/no image aval.png" alt="Admin"
+                                class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4> {{studentData?.name}}</h4>
+                                <p class="text-secondary mb-1">Student</p>
+                                <p class="text-muted font-size-sm">Khalsa College Mohali</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div style="height: 292px;" class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{studentData?.name}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{studentData?.email}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Phone</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{studentData?.mobile_no}}
+                            </div>
+                        </div>
+
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Class</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{studentData?.class}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Teacher</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{studentData?.incharge}}
+                            </div>
+                        </div>
+                    </div>
+                    <button id="basic" type="button" mat-button (click)="close()" >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

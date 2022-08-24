@@ -1,0 +1,195 @@
+<nav style="color: rgb(239, 239, 250);" class="navbar navbar-expand-lg navbar-light bg-dark"
+  [ngClass]="{'dark-theme-mode':isChecked}">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button (click)="open(notification)" mat-menu-item>
+      <mat-icon matBadge="1" matBadgeColor="warn">notifications </mat-icon>
+      <span>Notifications </span>
+    </button>
+    <button mat-menu-item routerLink="/logIn" (click)="loggedOut()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="aboveMenu">Books</button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button (click)="openDialog()" mat-menu-item> Dashboard</button>
+  <button mat-menu-item (click)="openRecorddialog()"> Record</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">Students</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+  <button mat-menu-item routerLink="/studash"> Dashboard</button>
+
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="beforeMenu">Teacher</button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item (click)="openIssuedialog()">Issue Book</button>
+    <button mat-menu-item (click)="openSubmitdialog()">Submit Book</button>
+
+  </mat-menu>
+
+
+  <button mat-button [matMenuTriggerFor]="afterMenu">Other</button>
+    <mat-menu #afterMenu="matMenu" xPosition="after">
+       <button mat-menu-item>Clear Fine</button>
+       <button mat-menu-item (click)="open(contents)">Book Lost</button>
+       <button mat-menu-item (click)="open(content)">About Us</button>
+    </mat-menu>
+</nav>
+
+<ng-template #contents let-modal>
+  <div id="print">
+    <div class="modal-header">
+      <h4 class="form-labels">Book Lost</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="onclose()"></button>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Book Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Lost On</label>
+        <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> Student Id</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text"></div>
+
+        </div>
+
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Student Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Class</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Fine</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+      </div>
+    </div>
+    <button mat-button [useExistingCss]="true" printSectionId="print" ngxPrint>Submit</button>
+    <mat-icon style="cursor: pointer;cursor: pointer;position: relative; top: 8px; left: 22pc;" (click)="submitFine">
+      print</mat-icon>
+  </div>
+</ng-template>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="form-labels">About Us</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onclose()"></button>
+  </div>
+  <div class="modal-body">
+    We are here to fulfill yours requirement
+  </div>
+</ng-template>
+
+<img style="    height: 33pc;
+    width: 100%;" src="../../assets/chuttersnap-Zf64Osndqvc-unsplash.jpg" class="img-fluid" alt="...">
+<ng-template #notification>
+  <div class="modal-header">
+    <h5 style="    font-size: 26px;" class="form-labels">Notifications</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="onclose()"></button>
+  </div>
+  <div role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+
+      <strong class="mr-auto">Book Store</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      2 English books are Left
+    </div>
+  </div>
+</ng-template>
+<div class="d-flex flex-column h-100">
+
+  <section class="vh-100" style="background-color:lightgray">
+    <div class="container py-6 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-12 col-xl-8">
+
+          <div class="card rounded-3">
+            <div class="card-body p-5">
+
+              <div class="d-flex justify-content-center mb-4">
+                <img src="../../assets/IMG-20200726-WA0022.jpg" class="rounded-circle shadow-1-strong" width="100"
+                  height="100" />
+              </div>
+              <figure class="text-center mb-0">
+                <blockquote class="blockquote">
+                  <p class="pb-3">
+                    <i class="fas fa-quote-left fa-xs text-primary">"</i>
+                    <span class="lead font-italic">Even Kings and emperors with heaps of wealth and vast dominion cannot
+                      compare with an ant filled with the love of God.</span>
+                    <i class="fas fa-quote-right fa-xs text-primary">"</i>
+                  </p>
+                </blockquote>
+                <figcaption class="blockquote-footer mb-0">
+                  Harleen Singh
+                </figcaption>
+              </figure>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="w-100 py-4 flex-shrink-0">
+    <div class="container py-4">
+      <div class="row gy-4 gx-5">
+        <div class="col-lg-4 col-md-6">
+          <h5 class="h1 text-white">FB.</h5>
+          <p class="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            incididunt.</p>
+          <p class="small text-muted mb-0">&copy; Copyrights. All rights reserved. <a class="text-primary"
+              href="#">https://kpnfoods.in/</a></p>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="text-white mb-3">Quick links</h5>
+          <ul class="list-unstyled text-muted">
+            <li><a href="#">Home</a></li>
+            <li><a href="www.facebook.com">Fb</a></li>
+            <li><a href="www.instagram.com">Insta</a></li>
+            <li><a href="www.twitter.com">Twitter</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h5 class="text-white mb-3">Newsletter</h5>
+          <p class="small text-muted">“Take a good book to bed with you – books do not snore.”</p>
+          <form action="#">
+            <div class="input-group mb-3">
+              <input class="form-control" type="text" placeholder="Recipient's username"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button class="btn btn-primary" id="button-addon2" type="button"><i
+                  class="fas fa-paper-plane"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

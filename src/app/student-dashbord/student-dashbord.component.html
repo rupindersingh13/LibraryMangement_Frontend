@@ -1,0 +1,130 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button routerLink="/dash" style="margin-left: -25px; background-color: #979a9d;" mat-button>
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+    <div class="d-flex">
+      <button style="color: black; background-color: #979a9d; border: none;" type="button"
+        class="btn btn-primary">Student
+        Details</button>
+    </div>
+    <div class="d-flex">
+      <button style="color: black;   background-color: #979a9d;" type="button" class="btn btn-primary"
+        (click)="open(contents,true)">AddStudents</button>
+    </div>
+  </div>
+</nav>
+ 
+<div class="cointainer">
+  <mat-form-field style="margin: 15px;margin: 10px;" appearance="standard">
+    <mat-label>Search</mat-label>
+    <input matInput   placeholder="Search by name" [(ngModel)]="searchname" #input>
+  </mat-form-field>
+</div>
+<table class="table mt-4 ">
+  <thead>
+    <tr>
+      <th scope="col">Id </th>
+      <th scope="col">Name </th>
+      <th scope="col"> Email ID </th>
+      <th scope="col">Phone No </th>
+      <th scope="col"> Class </th>
+      <th scope="col"> Incharge </th>
+      <th scope="col"> Action </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of list |filterpipe:searchname">
+      <td>{{item.student_Id}}</td>
+      <td (click)="openStudentDetails(item)"><strong style="cursor: pointer;">{{item.name}}</strong></td>
+      <td> {{item.email}}</td>
+      <td>{{ item.mobile_no}}</td>
+      <td>{{item.class}}</td>
+      <td>{{item.incharge}}</td>
+      <td>
+        <button (click)="onedit(item)" mat-button>
+          <mat-icon style="color:rgb(10, 11, 112)" (click)="open(contents,false)">edit</mat-icon>
+        </button>
+        <button mat-button>
+          <mat-icon style="color: red;" (click)="openDialog(item.student_Id)">delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<ng-template #contents let-modal>
+  <div class="modal-header">
+    <h5 class="form-labels">Student Details</h5>
+    <button type="button" class="btn-close" (click)="closeModel()" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addStudent" novalidate>
+      <div *ngIf="!show" class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Student ID</label>
+        <input type="number" class="form-control" formControlName="Student_Id" id="exampleInputEmail1"
+          aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+        <span class="text-danger" *ngIf="(  x.Student_Id.touched && x.Student_Id.invalid )">
+          Field is required
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" formControlName="Name"
+          aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+        <span class="text-danger" *ngIf="(x.Name.touched && x.Name.invalid)">
+          Field is required
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Class</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" formControlName="Class"
+          aria-describedby="emailHelp" required>
+        <div id="emailHelp" class="form-text"></div>
+        <span class="text-danger" *ngIf=" x.Class.invalid && (  x.Class.touched || x.Class.dirty )  ">
+          Field is required
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email ID</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" formControlName="Email"
+          aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text"></div>
+        <span class="text-danger" *ngIf="(x.Email.touched && x.Email.invalid)"> Please Enter Valid Email </span>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Phone No</label>
+        <input type="number" class="form-control" formControlName="Mobile_no" id="exampleInputPassword1">
+        <div *ngIf=" x.Mobile_no.touched && x.Mobile_no.invalid   " class="text-danger">
+          <div *ngIf=" x.Mobile_no.errors?.pattern"> Enter Valid Phone Number </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Incharge </label>
+        <input type="tel" class="form-control" formControlName="Incharge" id="Incharge">
+        <span class="text-danger" *ngIf="x.Incharge.invalid && (x.Incharge.touched || x.Incharge.dirty) "> Field is
+          required
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Add Image</label>
+        <input class="form-control" type="file" (change)="uploadImage($event.target)">
+        <span class="text-danger" *ngIf="checksize">Size exceeds !! Please upload short size image
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModel()">Close</button>
+    <button *ngIf="show" type="button" class="btn btn-primary" [disabled]=" addStudent.invalid"
+      (click)="addStudents()">Add</button>
+    <button *ngIf="!show" type="button" class="btn btn-primary" [disabled]=" addStudent.invalid"
+      (click)="updateStudents()">Update</button>
+  </div>
+</ng-template>
+
+ 

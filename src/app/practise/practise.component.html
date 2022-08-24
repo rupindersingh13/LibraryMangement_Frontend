@@ -1,0 +1,193 @@
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-stepper orientation="vertical"  linear   #stepper>
+  <mat-step [stepControl]="issueBook" completed="true ">
+     <form [formGroup]="issueBook">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="First name" formControlName="Name" required>
+      </mat-form-field>
+     </form>
+  </mat-step>
+  <mat-step [stepControl]="issueBook">
+     
+     <ng-template matStepLabel>Fill out your  </ng-template>
+     <mat-form-field appearance="fill">
+       <mat-label>Name</mat-label>
+       <input matInput placeholder="First name" formControlName="Class" required>
+     </mat-form-field>
+    
+ </mat-step>
+</mat-stepper>
+
+ 
+ <!-- <p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>My App</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon home-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+  </p>
+  
+
+ 
+<div class="container">
+    <div class="col-md-4">
+        <select class="form-control" (change)="getproductval($event)">
+            <option value="laptop">Laptop</option>
+            <option value="Mobile">Mobile</option>
+            <option value="TV">TV</option>
+            <option value="Wh">Wh</option>
+           </select>
+    </div>
+    <div class="col-md-12"[ngSwitch]="selectedProduct">
+        <h2 class="text-success" *ngSwitchCase="'laptop'">Laptop</h2>
+        <h2 class="text-success"  *ngSwitchCase="'Mobile'">Mobile</h2>
+        <h2 class="text-success" *ngSwitchCase="'TV'">TV</h2>
+        <h2 class="text-success" *ngSwitchCase="'Wh'">Wh </h2>
+
+    </div> <br>
+    <div class="row">
+        <div class="column-md-3">
+            <input #val type="text" name="" class="form-control" >
+            <button mat-button  (click)="adduser(val)">Add</button>
+            <button mat-button  (click)="remuser(val)">Remove</button>
+        </div>
+        <div class="row">
+            <div class="coumn-md-10">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>
+                                users
+                            </th>
+                            <th>
+                                Remove
+                            </th>
+                        </tr>
+                    </thead>
+                    <tr *ngFor ="let item of users; index as i">
+                        <td >
+                            {{item.name}}  
+                        </td>
+                        <td >
+                            <button mat-button  (click)="removebyid(i)">Remove</button> 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+<app-child [placeholder]="'search'" [sendvalue]="sendvalue"></app-child>
+<input type="text" value= {{sendvalue}} > 
+
+<div style="padding: 25px; margin: 25px;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Add</h1>
+                    <div class="card-body">
+                        <button #add  class="btn btn-primary">
+                          Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Add video</h1>
+                    <div class="card-body">
+                         <ul id="Elcointainer">
+                             
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Interval and Timer</h1>
+            <div class="card-body">
+                 <ul  >
+                     {{msg}}
+                     {{timer}}
+                 </ul>
+            </div>
+        </div>
+    </div><br>
+    <button  (click)="start()"  class="btn btn-primary">
+        Start 
+      </button>
+      <button style="margin: 3px;" (click)="stop()"  class="btn btn-primary">
+        Stop
+      </button> 
+      <button style="margin: 3px;" (click)="startTimer()"  class="btn btn-primary">
+        Timer
+      </button> 
+      <button style="margin: 3px;" (click)="show()"  class="btn btn-primary">
+        Stop
+      </button> 
+</div>
+<table class="table mt-4 ">
+    <thead>
+      <tr>
+        <th scope="col">Id </th>
+        <th scope="col">Name </th>
+        <th scope="col"> Email ID </th>
+        <th scope="col">Phone No </th>
+        <th scope="col"> Class </th>
+        <th scope="col"> Incharge </th>
+        <th scope="col"> Action </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataSource">
+        <td>{{item.book_Id}}</td>
+        <td> {{item.book_Name}}</td>
+        <td>{{ item.price}}</td>
+        <td>{{item.status}}</td>
+        
+        
+     </tr>
+    </tbody>
+  </table> -->
+  <!-- <form  [formGroup]="issueBook" class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>State</mat-label>
+      <input matInput aria-label="StudentProp" [matAutocomplete]="auto" type="text" 
+      [formControl]="myControl" formControlName="Name" >
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let datas of names  " >
+            <img class="example-option-img" aria-hidden src="../../assets/no image aval.png" height="25">
+            {{datas.name}}
+            <span> </span>  
+             
+          </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+  
+    <br>
+  
+     
+  </form> -->
+  

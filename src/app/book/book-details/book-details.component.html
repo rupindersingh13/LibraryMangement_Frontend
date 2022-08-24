@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            
+            <div >
+                <h1>Book Details</h1>
+                </div>  
+            <div class="project-info-box">
+                <p><b>Id:</b> {{tableData?.book_Id}}</p>
+                <p><b> Name:</b> {{tableData?.book_Name}}</p>
+                <p><b>Author:</b> {{tableData?.author}}</p>
+                <p><b>Quantity:</b> {{tableData?.quantity}}</p>
+                <p class="mb-0"><b>Price:</b>{{tableData?.price}}</p>
+            </div><!-- / project-info-box -->
+                 <h2>Description</h2>
+                <p class="mb-5">{{tableData?.description}}</p>
+            
+             
+        </div><!-- / column -->
+         
+        <div class="col-md-5">
+            <h2>Book Image</h2>
+            <div class="Setimg" >
+                <img *ngIf="tableData?.image!=null" style=" height: 20pc;
+                width: 18pc;" src={{tableData?.image}} alt="project-image" class="rounded">
+                <img *ngIf="tableData?.image==null" src="../../../assets/no image aval.png"></div>
+             
+        </div><!-- / column -->
+        
+    </div>
+</div>

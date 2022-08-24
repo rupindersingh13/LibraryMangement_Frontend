@@ -1,0 +1,73 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.light-theme{
+    --popup-bg: #f4f5f7;
+    --select-text: #3C21F7;
+   --border-select: #E5E2FE;
+   --green: green;
+   --dark-green: darken(#568de5, 50%);
+   --black-whithe-bg: white;
+   --main-bg: #edf2f7;
+   --black-white-text: #293042;
+   --sidebar-light-dark: #293042;
+   --input-bg: #f3f3f3;
+   --upperNavbar-bg: white;
+   --mbgyellow: #FFF7E1;
+   --mbggreen: #E3F5E8;
+   --mbgblue: #EFECFF;
+
+.dark-logo{
+    display: none!important;
+}
+.light-logo {
+    display: block;
+}
+}
+
+.dark-theme {
+@include angular-material-theme($dark-theme);
+--popup-bg: #23232d;
+--select-text: #9998a2;
+--border-select: #393636;
+--mbgyellow: #171721;
+--mbggreen: #171721;
+--mbgblue: #171721;
+--black-whithe-bg: #23232d;
+--main-bg: #171721;
+--black-white-text: #ffffff;
+--sidebar-light-dark: #23232d;
+--input-bg: #23232d;
+--upperNavbar-bg: #171721;
+--buttons-color: black;
+--input-bg: #1F1F1F;
+--table-button: #ff0000;
+--black-white-text: #E2E2E2;
+ .form-control {
+     color: white;
+     &:focus{
+         background-color: transparent;
+         color: white;
+         border-color: white;
+     }
+ }
+ .dark-logo{
+     display: block;
+ }
+ .light-logo {
+    display: none!important;
+}
+ svg {
+    fill: white!important;
+}
+ }
+
+$primary_blue: #1A3561;
+$secondary_blue: #568de5;
+$yellow: #ffe87e;
+ 

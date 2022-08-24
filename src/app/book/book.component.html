@@ -1,0 +1,183 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button (click)="open(contents,true)" routerLink="/dash" style="margin-left: -25px; background-color: #979a9d;" mat-button>
+         AddBook
+      </button>
+      <div class="d-flex">
+        <button style="color: black; background-color: #979a9d; border: none; height: 36px;width: 55pc;" type="button" class="btn btn-primary">Book
+          Details</button>
+      </div>
+      <div class="d-flex">
+        <button (click)="onNoclick()" style="color: black;   background-color: #979a9d;" type="button" class="btn btn-primary"   ><mat-icon>close</mat-icon>
+          </button>
+      </div>
+    </div>
+</nav>
+
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applysearch($event)" placeholder="Search" #input>
+    </mat-form-field>
+     
+<table mat-table #table [dataSource]="dataSource" class="w-100 mat-elevation-z8" matSort>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="book_Id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Id </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.book_Id}}
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="book_Name">
+    <th mat-header-cell *matHeaderCellDef  >Name</th>
+    <td mat-cell *matCellDef="let element">
+      {{element.book_Name }}
+    </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="author">
+    <th mat-header-cell *matHeaderCellDef  > Author </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.author}}
+    </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.price}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="qty">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty </th>
+    <tr><td mat-cell *matCellDef="let element">
+      {{element.quantity}}
+      
+    </td> </tr>
+    
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th style="text-align:center;" mat-header-cell *matHeaderCellDef> Action </th>
+    
+    <td style="text-align:center;" mat-cell *matCellDef="let element">
+      <span style="color: #0a0e0a; cursor: pointer;" class="material-icons mr-8 blue icon_css"  title="View"  (click)="openBookDetails(element)">
+        launch</span>
+      <span style="color: red; margin: 12px; cursor: pointer;" class="material-icons mr-8 red icon_css"  title="Delete" (click)="openDeletedialog(element.book_Id)"> delete </span>
+      <span style="color: #2e1ccf; cursor: pointer;" class="material-icons yellow icon_css"    
+        title="Update" (click)="open(contents,false)" > edit
+      </span>
+    </td>
+
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row (click)="onupdate (row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+</table>
+</div>
+
+      <ng-template  #contents let-modal> 
+        <div class="modal-header">
+          <h5 style="    font-size: 26px;" class="form-labels">Book Details</h5>
+          <button type="button" class="btn-close"  aria-label="Close" (click)=" close()" ></button>
+        </div>
+        <div class="modal-body">
+          <form  [formGroup]="addbook" novalidate>
+            <div *ngIf="!show" class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Book Id</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" formControlName="Book_Id"
+                aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text"></div>
+               <span class="text-danger" *ngIf="(x.Book_Id.touched && x.Book_Id.invalid)">
+                Field is required
+              </span>  
+            </div>
+            
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Name</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" formControlName="Book_Name"
+                aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text"></div>
+               <span class="text-danger" *ngIf="(x.Book_Name.touched && x.Book_Name.invalid)">
+                Field is required
+              </span>  
+            </div>
+           
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Author</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" formControlName="Author"
+                aria-describedby="emailHelp" required>
+              <div id="emailHelp" class="form-text"></div>
+             <span class="text-danger" *ngIf=" x.Author.invalid && (  x.Author.touched || x.Author.dirty )  ">
+                Field is required
+              </span> 
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Price</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" formControlName="Price"
+                  aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text"></div>
+               <span class="text-danger" *ngIf=" x.Price.invalid && (  x.Price.touched || x.Price.dirty )  ">
+                  Field is required
+                </span> 
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Quantity</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" formControlName="Quantity"
+                  aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text"></div>
+               <span class="text-danger" *ngIf=" x.Price.invalid && (  x.Quantity.touched || x.Quantity.dirty )  ">
+                  Field is required
+                </span> 
+              </div>
+             
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="Description"></textarea>
+            </div>
+            <div class="mb-3">
+
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Book Type</option>
+                <option value="1">Math</option>
+                <option value="2">English</option>
+                <option value="3">G.K</option>
+                <option value="4">Computer</option>
+                <option value="5">Punjabi</option>
+                <option value="6">History</option>
+                <option value="7">Commerce</option>
+                <option value="8">Non-Medical</option>
+                <option value="9">Arts</option>
+                <option value="10">Others</option>
+              </select>
+            </div>
+        
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Add Image</label>
+              <input  class="form-control" type="file" (change)="uploadImage($event.target)">
+              <span class="text-danger" *ngIf="checksize">Size exceeds !! Please upload short size image
+              </span>
+            </div>
+             
+          </form>
+        </div>
+        <div class="modal-footer">
+      
+           
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)=" close()" >Close</button>
+          <button *ngIf="show " type="button" class="btn btn-primary" [disabled]="addbook.invalid" (click)="onsubmit()" >Add</button>
+          <button *ngIf="!show " type="button" class="btn btn-primary" [disabled]="addbook.invalid" (click)="Updatebook()" >Update</button>
+        </div>
+      </ng-template>
+      
+
+      
+      

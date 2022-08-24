@@ -1,0 +1,141 @@
+<mat-card class="heading">
+    <h1>Submit Book</h1>
+</mat-card>
+<div class="row">
+    <div class="col-3">
+        <form [formGroup]="submitbook" class="example-form" style="margin-top: 35px;">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput aria-label="StudentProp" formControlName="Name" [matAutocomplete]="auto" [formControl]="nameCtrl">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let StudentProp of filteredNames | async" [value]="StudentProp.name"
+                        (click)="getval(StudentProp)">
+                        <img style="border-radius: 25px;" class="example-option-img" aria-hidden
+                            [src]="StudentProp.image" height="30" width="25">
+                        <span style="margin: 10px;">{{StudentProp.name}}</span>
+
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field><br>
+            
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Student ID</mat-label>
+                <input matInput aria-label="StudentProp" placeholder="Id" formControlName="Student_Id">
+            </mat-form-field><br>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Class</mat-label>
+                <input matInput placeholder="ex.bca" formControlName="Class">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Books</mat-label>
+                <mat-select (selectionChange)="selectvalue($event)">
+                    <mat-option   [value]=[item.book_Id,item.book_Name,item.due_Date,item.issue_Date] *ngFor='let item of bookList'>{{item.book_Name}}
+                    </mat-option>
+                    <mat-option  *ngIf="noBookfound">No record found</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill" style="width: 202px;">
+                <mat-label> Submit On</mat-label>
+                <input matInput [matDatepicker]="pickers" formControlName="Submit_Date">
+                <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                <mat-datepicker #pickers></mat-datepicker>
+            </mat-form-field><br>
+
+            <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button> 
+            <mat-spinner *ngIf="startSpinner" style="margin-top: 15px;"></mat-spinner>
+        </form>
+    </div>
+    <ng-container>
+         <div class="col-9 mb-4" style="margin-top: 38px;">
+        <mat-card style="height: 37pc;" class="example-card" >
+             
+            <mat-card-subtitle style="margin-top: 15px; text-align: center;"><strong> Book Returning Recipt</strong></mat-card-subtitle>
+            <mat-card-content style="    height: 447px;">
+                <div id="print">
+                    <div class="card" style="width:660px;">
+                        <div class="card-body">
+                            <mat-card-subtitle>Details</mat-card-subtitle>
+                             
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <strong><h5 class="mb-0">Name</h5></strong>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{reciptData?.Name}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Class</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{reciptData?.Class}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Book</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{reciptData?.Book_Name}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Issue Date</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{reciptData?.Issue_Date|date}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Due Date</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{reciptData?.Due_Date|date}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Submit  Date</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{reciptData?.Submit_Date|date}}
+                                </div>
+                            </div>
+                            <hr>
+                            <mat-card-subtitle style="margin-top: 15px;">Status</mat-card-subtitle>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Fine</h5>
+                                </div>
+                                <div class="col-sm-9 text-danger ">
+                                    <strong> {{ fine}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div >
+                <div>
+                    <mat-icon  style="margin-left: 15px;    position: relative;
+                    top: 10px;" >print </mat-icon><br>
+                 <button mat-button [useExistingCss]="true" printSectionId="print" ngxPrint>print</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    </ng-container>
+   
+
+</div>

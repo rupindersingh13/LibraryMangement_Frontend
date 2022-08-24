@@ -1,0 +1,27 @@
+ 
+.header{
+    background-color: #4A88EB;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+p {
+    font-size: 18px;
+    font-weight: 400;
+    padding: 20px 15px;
+    margin-bottom: 0px!important;
+}
+.action {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    margin-bottom: 15px;
+    
+     
+}
+.button {
+    margin-left: 8px;
+}
+
+

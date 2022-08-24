@@ -1,0 +1,80 @@
+<div *ngIf="hide" class="container">
+    <div class="row">
+        <div class="header">
+            <div class="title">
+                OTP Confirmation
+            </div>
+        </div>
+        <div class="container height-100 d-flex justify-content-center align-items-center">
+            <div class="position-relative">
+                <div class="card p-2 text-center">
+                    <h6>Please enter the one time password <br> to verify your account</h6>
+                    <div> <span>A code has been sent to your mail</span> </div>
+                    <form [formGroup]="ValidateOTP" >
+                        <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+                            <input class="m-2 text-center form-control rounded" type="text" id="first" 
+                                (keyup)="changed(1,$event )" formControlName="first" maxlength="1" />
+                            <input class="m-2 text-center form-control rounded" type="text" id="second"  
+                                (keyup)="changed(2 ,$event )" formControlName="second" maxlength="1" />
+                            <input class="m-2 text-center form-control rounded" type="text" id="third"  
+                                (keyup)="changed(3,$event  )" formControlName="third" maxlength="1" />
+                            <input class="m-2 text-center form-control rounded" type="text" id="fourth" 
+                                (keyup)="changed(4,$event  )" formControlName="fourth" maxlength="1" />
+                            <div class="mt-2"> <button class="btn btn-danger px-4 validate"
+                                    (click)="validate()">Validate</button>
+                            </div>
+                        </div>
+                    </form>
+                    <span style="color: red;" id="countdown">{{display}}</span>
+                    
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+    <div>
+        
+    </div>
+    <div *ngIf="show" class="container">
+        <div class="row">
+            <div class="header">
+                <div style="text-align: center;" class="title">
+                   Reset Password
+                </div>
+            </div>
+            <div class="form-outline mb-3">
+                
+                <form [formGroup]="signup">
+                     
+          
+            
+          
+                    <!-- Email input -->
+                     
+          
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                      <label class="form-label" for="form3Example4">Password</label>
+                      <input type="password" id="form3Example4" class="form-control form-control-lg"
+                        placeholder="Enter password"  formControlName="Password"/>
+                     
+                      <span *ngIf=" x.Password.invalid && (x.Password.touched || x.Password.dirty)" class="text-danger">Field is Required</span>
+                    </div>
+                    <div class="form-outline mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                      <input formControlName="ConfirmPassword" placeholder="Confirm password" type="password" class="form-control" id="exampleInputPassword1" (keyup)="checkpassword()">
+                      <span class="text-danger" *ngIf="msg">Password doesn't match</span>
+                    </div>
+           
+                      
+                      
+                      <button type="button" class="btn btn-primary btn-lg"
+                      (click) ="resetpass()" [disabled]="msg">SignUp</button>
+                    
+                     
+                  </form>
+                       
+        </div>
+    </div>
+
+    

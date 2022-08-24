@@ -1,0 +1,54 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput
+           aria-label="StudentProp"
+           [matAutocomplete]="auto"
+           [formControl]="nameCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let StudentProp of filteredNames | async" [value]="StudentProp.name">
+        <img style="border-radius: 25px;" class="example-option-img" aria-hidden [src]="StudentProp.image" height="30" width="25" >
+        <span style="margin: 10px;">{{StudentProp.name}}</span>  
+        
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br>
+
+   
+</form>
+<div id="print">
+<section   class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+
+            <div class="text-center mb-4 pb-2">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-quotes/bulb.webp" alt="Bulb" width="100">
+            </div>
+
+            <figure class="text-center mb-0">
+              <blockquote class="blockquote">
+                <p class="pb-3">
+                  <i class="fas fa-quote-left fa-xs text-primary"></i>
+                  <span class="lead font-italic">Many of life's failures are people who did not realize how close they were to success when they gave up.</span>
+                  <i class="fas fa-quote-right fa-xs text-primary"></i>
+                </p>
+              </blockquote>
+              <figcaption class="blockquote-footer mb-0">
+                Thomas Edison
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<button mat-button printSectionId="print"
+ngxPrint>print</button>
